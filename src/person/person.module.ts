@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { PersonController } from './person.controller';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
-  controllers: [PersonController]
+  imports: [CqrsModule],
+  controllers: [PersonController],
 })
 export class PersonModule {}

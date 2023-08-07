@@ -1,1 +1,16 @@
-export class GetPersonsHandler {}
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { GetPersonsQuery } from '../../implementation/get-persons.query/get-persons.query';
+import { Person } from 'src/entities/person/person';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+@QueryHandler(GetPersonsQuery)
+export class GetPersonsHandler implements IQueryHandler<GetPersonsQuery> {
+  constructor(
+    @InjectRepository(Person) private personRepo: Repository<Person>,
+  ) {}
+
+  async execute(query: GetPersonsQuery): Promise<Person[]> {
+    return await this.personRepo.find();
+  }
+}
