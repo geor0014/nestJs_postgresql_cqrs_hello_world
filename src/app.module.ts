@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Person } from './entities/person/person';
+import { PersonModule } from './person/person.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { Person } from './entities/person/person';
       database: 'testDB', // default
       entities: [Person],
     }),
+    PersonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
